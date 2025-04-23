@@ -1,11 +1,26 @@
+from django.http import HttpRequest
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 
 from django.shortcuts import get_object_or_404
+from rest_framework.views import APIView
 
-from cinema.models import Movie
+from cinema.models import Movie, Actor, Genre, CinemaHall
 from cinema.serializers import MovieSerializer
+
+
+class ListGenre(APIView):
+
+    def get(self, request: HttpRequest) -> Response:
+
+        genres = Genre.objects.all()
+        return Response(genres, status=status.HTTP_200_OK)
+
+    def post(self, request: HttpRequest) -> Response:
+
+
+
 
 
 @api_view(["GET", "POST"])
